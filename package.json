@@ -1,0 +1,43 @@
+{
+  "name": "tree-sitter-oberon2",
+  "version": "0.1.0",
+  "description": "Tree Sitter grammar for Oberon-2",
+  "main": "bindings/node",
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "test": "tree-sitter test && tree-sitter parse examples/* --quite --time",
+    "test-windows": "tree-sitter test",
+    "build-test": "tree-sitter generate && node-gyp build && tree-sitter test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viegasfh/tree-sitter-oberon-2.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "oberon-2",
+    "parser"
+  ],
+  "author": "Fidel H Viegas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/viegasfh/tree-sitter-oberon-2/issues"
+  },
+  "homepage": "https://github.com/viegasfh/tree-sitter-oberon-2#readme",
+  "dependencies": {
+    "nan": "^2.14.1",
+    "node-gyp": "^9.3.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.6"
+  },
+  "tree-sitter": {
+    "scope": "source.mod",
+    "file-types": [
+      "mod",
+      "def",
+      "Mod",
+      "obn"
+    ]
+  }
+}
