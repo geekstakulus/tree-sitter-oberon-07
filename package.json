@@ -25,11 +25,11 @@
   },
   "homepage": "https://github.com/viegasfh/tree-sitter-oberon-2#readme",
   "dependencies": {
-    "nan": "^2.14.1",
+    "nan": "^2.17.0",
     "node-gyp": "^9.3.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.6"
+    "tree-sitter-cli": "^0.20.7"
   },
   "tree-sitter": {
     "scope": "source.mod",
