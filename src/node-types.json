@@ -1,0 +1,1465 @@
+[
+  {
+    "type": "actual_params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "add_operator",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "kOr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kArray",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "length",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "designator",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "base_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qualident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case_label_list",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_label_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_range",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kCase",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_expression",
+          "named": true
+        },
+        {
+          "type": "ident_def",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_decls",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_decl",
+          "named": true
+        },
+        {
+          "type": "kConst",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "designator",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "qualident",
+          "named": true
+        },
+        {
+          "type": "selector",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "simple_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "factor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actual_params",
+          "named": true
+        },
+        {
+          "type": "designator",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "factor",
+          "named": true
+        },
+        {
+          "type": "kFalse",
+          "named": true
+        },
+        {
+          "type": "kNil",
+          "named": true
+        },
+        {
+          "type": "kTrue",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "set",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident_list",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_list_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_expression",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kDo",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kTo",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "formal_params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fp_section",
+          "named": true
+        },
+        {
+          "type": "qualident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "formal_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kArray",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "qualident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fp_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal_type",
+          "named": true
+        },
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "kVar",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ident_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ident_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident_def",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kElse",
+          "named": true
+        },
+        {
+          "type": "kElseif",
+          "named": true
+        },
+        {
+          "type": "kIf",
+          "named": true
+        },
+        {
+          "type": "kThen",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "kImport",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "integer",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kEnd",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "qualident",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "length",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "const_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mul_operator",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "kDiv",
+          "named": true
+        },
+        {
+          "type": "kMod",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pointer_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kPointer",
+          "named": true
+        },
+        {
+          "type": "kTo",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_decls",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kBegin",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kReturn",
+          "named": true
+        },
+        {
+          "type": "procedure_decls",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        },
+        {
+          "type": "type_decls",
+          "named": true
+        },
+        {
+          "type": "variable_decls",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actual_params",
+          "named": true
+        },
+        {
+          "type": "designator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "procedure_body",
+          "named": true
+        },
+        {
+          "type": "procedure_heading",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_decls",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "procedure_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_heading",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal_params",
+          "named": true
+        },
+        {
+          "type": "ident_def",
+          "named": true
+        },
+        {
+          "type": "kProcedure",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal_params",
+          "named": true
+        },
+        {
+          "type": "kProcedure",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "qualident",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "record_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "base_type",
+          "named": true
+        },
+        {
+          "type": "field_list_seq",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kRecord",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "relation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "repeat_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kRepeat",
+          "named": true
+        },
+        {
+          "type": "kUntil",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "selector",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression_list",
+          "named": true
+        },
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "qualident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "set",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "simple_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "add_operator",
+          "named": true
+        },
+        {
+          "type": "term",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "procedure_call",
+          "named": true
+        },
+        {
+          "type": "repeat_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "statement_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "struct_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "procedure_type",
+          "named": true
+        },
+        {
+          "type": "record_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "term",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "factor",
+          "named": true
+        },
+        {
+          "type": "mul_operator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qualident",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident_def",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_decls",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kType",
+          "named": true
+        },
+        {
+          "type": "type_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident_list",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_decls",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kVar",
+          "named": true
+        },
+        {
+          "type": "variable_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kDo",
+          "named": true
+        },
+        {
+          "type": "kElseif",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kWhile",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "#",
+    "named": false
+  },
+  {
+    "type": "&",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ":=",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": "END",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "ident",
+    "named": true
+  },
+  {
+    "type": "kArray",
+    "named": true
+  },
+  {
+    "type": "kBegin",
+    "named": true
+  },
+  {
+    "type": "kBy",
+    "named": true
+  },
+  {
+    "type": "kCase",
+    "named": true
+  },
+  {
+    "type": "kConst",
+    "named": true
+  },
+  {
+    "type": "kDiv",
+    "named": true
+  },
+  {
+    "type": "kDo",
+    "named": true
+  },
+  {
+    "type": "kElse",
+    "named": true
+  },
+  {
+    "type": "kElseif",
+    "named": true
+  },
+  {
+    "type": "kFalse",
+    "named": true
+  },
+  {
+    "type": "kFor",
+    "named": true
+  },
+  {
+    "type": "kIf",
+    "named": true
+  },
+  {
+    "type": "kImport",
+    "named": true
+  },
+  {
+    "type": "kIn",
+    "named": true
+  },
+  {
+    "type": "kIs",
+    "named": true
+  },
+  {
+    "type": "kMod",
+    "named": true
+  },
+  {
+    "type": "kModule",
+    "named": true
+  },
+  {
+    "type": "kNil",
+    "named": true
+  },
+  {
+    "type": "kOf",
+    "named": true
+  },
+  {
+    "type": "kOr",
+    "named": true
+  },
+  {
+    "type": "kPointer",
+    "named": true
+  },
+  {
+    "type": "kProcedure",
+    "named": true
+  },
+  {
+    "type": "kRecord",
+    "named": true
+  },
+  {
+    "type": "kRepeat",
+    "named": true
+  },
+  {
+    "type": "kReturn",
+    "named": true
+  },
+  {
+    "type": "kThen",
+    "named": true
+  },
+  {
+    "type": "kTo",
+    "named": true
+  },
+  {
+    "type": "kTrue",
+    "named": true
+  },
+  {
+    "type": "kType",
+    "named": true
+  },
+  {
+    "type": "kUntil",
+    "named": true
+  },
+  {
+    "type": "kVar",
+    "named": true
+  },
+  {
+    "type": "kWhile",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
+    "named": false
+  }
+]
