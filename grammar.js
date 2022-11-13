@@ -22,15 +22,6 @@ const
     repeat(digit), optional(scale_factor)
   ),
 
-/*function declaration_seq(const_decls, type_decls, variable_decls, procedure_decls) {
-  return seq(
-    optional(const_decls),
-    optional(type_decls),
-    optional(variable_decls),
-    repeat(procedure_decls)
-  );
-}*/
-
 module.exports = grammar({
   name: 'oberon2',
 
@@ -102,12 +93,6 @@ module.exports = grammar({
     module: $ => seq(
       $.kModule, $.ident, ';',
       optional($.import_list),
-      /*declaration_seq(
-        $.const_decls,
-        $.type_decls,
-        $.variable_decls,
-        $.procedure_decls
-      ),*/
       optional($.const_decls),
       optional($.type_decls),
       optional($.variable_decls),
@@ -173,38 +158,6 @@ module.exports = grammar({
     procedure_decls: $ => seq(
       $.procedure_decl, ';'
     ),
-
-    // declaration_seq = 
-    /*declaration_seq: $ => seq(
-      // ["CONST" {const_decl ";"}]
-      optional(seq(
-        'CONST', 
-        repeat(seq(
-          $.const_decl, ';'
-        ))
-      )),
-
-      // ["TYPE" {type_decl ";"}]
-      optional(seq(
-        'TYPE', 
-        repeat(seq(
-          $.type_decl, ';'
-        ))
-      )),
-
-      // ["VAR" {var_decl ";"}]
-      optional(seq(
-        'VAR', 
-        repeat(seq(
-          $.variable_decl, ';'
-        ))
-      )),
-
-      // {procedure_decl ";"}
-      repeat(seq(
-        $.procedure_decl, ';'
-      ))
-    ),*/
 
     // const_decl = ident_def "=" const_expresion
     const_decl: $ => seq(
@@ -535,6 +488,5 @@ module.exports = grammar({
       optional(seq($.kBy, $.const_expression)),
       $.kDo, optional($.statement_seq), $.kEnd
     )
-
   }
 });
