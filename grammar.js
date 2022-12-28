@@ -5,9 +5,9 @@ const
 
   // string = """ {character} """ | digit {hex_digit} "X"
   string_literal = choice(
-    /"[^"\n]"/,
+    /"[^"\n]*"/,
     seq(digit, repeat(hex_digit), 'X')
-  )
+  ),
 
   // ident = letter {letter | digit}
   identifier = seq(letter, repeat(choice(letter, digit))),
@@ -20,70 +20,16 @@ const
   real = seq(
     digit, repeat(digit), '.', 
     repeat(digit), optional(scale_factor)
-  ),
+  );
 
 module.exports = grammar({
   name: 'oberon2',
 
-  extras: $ => [$.comment],
+  extras: $ => [$.comment, /\s/],
 
   word: $ => $.ident,
 
   rules: {
-    string: $ => token(string_literal),
-    // number = integer | real
-    number: $ => choice($.integer, token(real)),
-
-    // integer = digit {digit} | digit {hex_digit} "H"
-    integer: $ => choice(
-      token(seq(digit, repeat(digit))),
-      token(seq(hex_digit, 'H'))
-    ),
-    
-    // keywords
-    kBy: $ => 'BY',
-    kDo: $ => 'DO',
-    kIf: $ => 'IF',
-    kIn: $ => 'IN',
-    kIs: $ => 'IS',
-    kOf: $ => 'OF',
-    kOr: $ => 'OR',
-    kTo: $ => 'TO',
-
-    kDiv: $ => 'DIV',
-    kEnd: $ => 'END',
-    kFor: $ => 'FOR',
-    kMod: $ => 'MOD',
-    kNil: $ => 'NIL',
-    kVar: $ => 'VAR',
-
-    kCase: $ => 'CASE',
-    kElse: $ => 'ELSE',
-    kThen: $ => 'THEN',
-    kTrue: $ => 'TRUE',
-    kType: $ => 'TYPE',
-
-    kArray: $ => 'ARRAY',
-    kBegin: $ => 'BEGIN',
-    kConst: $ => 'CONST',
-    kFalse: $ => 'FALSE',
-    kUntil: $ => 'UNTIL',
-    kWhile: $ => 'WHILE',
-
-    kElseif: $ => 'ELSEIF',
-    kImport: $ => 'IMPORT',
-    kModule: $ => 'MODULE',
-    kRecord: $ => 'RECORD',
-    kRepeat: $ => 'REPEAT',
-    kReturn: $ => 'RETURN',
-
-    kPointer: $ => 'POINTER',
-
-    kProcedure: $ => 'PROCEDURE',
-
-    ident: $ => token(identifier),
-
-    comment: $ => token(seq(/[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]/)),
 
     // module = "MODULE" ident ";"
     // [import_list]
@@ -91,7 +37,7 @@ module.exports = grammar({
     // ["BEGIN" statement_seq]
     // "END" ident "."
     module: $ => seq(
-      $.kModule, $.ident, ';',
+      $.module_header,
       optional($.import_list),
       optional($.const_decls),
       optional($.type_decls),
@@ -101,10 +47,10 @@ module.exports = grammar({
         $.kBegin,
         optional($.statement_seq)
       )),
-      $.kEnd,
-      $.ident,
-      '.'
+      $.module_footer
     ),
+    module_header: $ => seq($.kModule, $.ident, ';'),
+    module_footer: $ => seq($.kEnd, $.ident, '.'),
 
     // import_list = "IMPORT" import {"," import}
     import_list: $ => seq(
@@ -234,6 +180,7 @@ module.exports = grammar({
       optional(seq(
         $.fp_section, repeat(seq(';', $.fp_section))
       )),
+      ")",
       optional(seq(
         ':', $.qualident
       ))
@@ -254,10 +201,10 @@ module.exports = grammar({
     ),
 
     // qualident = [ident "."] ident
-    qualident: $ => seq(
-      optional(seq($.ident, '.')),
-      $.ident
-    ),
+    qualident: $ => prec.left(choice(
+      seq($.ident),
+      seq(field("qualifier", $.ident), '.', field("property", $.ident)),
+    )),
 
     // ident_def = ident ["*"]
     ident_def: $ => seq(
@@ -364,10 +311,10 @@ module.exports = grammar({
     ),
 
     // designator = qualident {selector}
-    designator: $ => seq(
+    designator: $ => prec.left(seq(
       $.qualident,
       repeat($.selector)
-    ),
+    )),
 
     // selector = "." ident | "[" expression_list "]" | "^" | "(" qualident ")"
     selector: $ => choice(
@@ -487,6 +434,61 @@ module.exports = grammar({
       $.kFor, $.ident, ':=', $.expression, $.kTo, $.expression,
       optional(seq($.kBy, $.const_expression)),
       $.kDo, optional($.statement_seq), $.kEnd
-    )
+    ),
+
+    string: $ => token(string_literal),
+    // number = integer | real
+    number: $ => choice($.integer, token(real)),
+
+    // integer = digit {digit} | digit {hex_digit} "H"
+    integer: $ => choice(
+      token(seq(digit, repeat(digit))),
+      token(seq(hex_digit, 'H'))
+    ),
+    
+    // keywords
+    kBy: $ => 'BY',
+    kDo: $ => 'DO',
+    kIf: $ => 'IF',
+    kIn: $ => 'IN',
+    kIs: $ => 'IS',
+    kOf: $ => 'OF',
+    kOr: $ => 'OR',
+    kTo: $ => 'TO',
+
+    kDiv: $ => 'DIV',
+    kEnd: $ => 'END',
+    kFor: $ => 'FOR',
+    kMod: $ => 'MOD',
+    kNil: $ => 'NIL',
+    kVar: $ => 'VAR',
+
+    kCase: $ => 'CASE',
+    kElse: $ => 'ELSE',
+    kThen: $ => 'THEN',
+    kTrue: $ => 'TRUE',
+    kType: $ => 'TYPE',
+
+    kArray: $ => 'ARRAY',
+    kBegin: $ => 'BEGIN',
+    kConst: $ => 'CONST',
+    kFalse: $ => 'FALSE',
+    kUntil: $ => 'UNTIL',
+    kWhile: $ => 'WHILE',
+
+    kElseif: $ => 'ELSEIF',
+    kImport: $ => 'IMPORT',
+    kModule: $ => 'MODULE',
+    kRecord: $ => 'RECORD',
+    kRepeat: $ => 'REPEAT',
+    kReturn: $ => 'RETURN',
+
+    kPointer: $ => 'POINTER',
+
+    kProcedure: $ => 'PROCEDURE',
+
+    ident: $ => token(identifier),
+
+    comment: $ => token(seq(/[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]/)),
   }
 });
