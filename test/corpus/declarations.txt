@@ -4,40 +4,23 @@ variables
 
 MODULE Variables;
   VAR
-    i, j : INTEGER;
-    name: ARRAY 20 OF CHAR;
-    age: INTEGER;
+    i : INTEGER;
 END Variables.
 ---
 
 (module
-  (kModule)
-  (ident)
+  (module_header
+    (kModule)
+    (ident))
   (variable_decls
     (kVar)
     (variable_decl
       (ident_list
         (ident_def
-          name: (ident))
-        (ident_def
-          name: (ident)
-          (type
-            type_name: (ident)))
-        (ident_def
-          name: (ident)
-          (type
-            (struct_type
-              (array_type
-                (kArray)
-                length: (length)
-                (kOf)
-                (type
-                  (qualident
-                    type_name: (ident)))))))
-
-        (ident_def
-          name: (ident)
-          (type
-            type_name: (ident))))))
-    (kEnd)
-    (kIdent))
+          (ident)))
+      (type
+        (qualident
+          (ident)))))
+    (module_footer
+      (kEnd)
+      (ident)))
