@@ -2,344 +2,12 @@
   "name": "oberon2",
   "word": "ident",
   "rules": {
-    "string": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "\"[^\"\\n]\""
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[0-9]"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[0-9A-F]"
-                }
-              },
-              {
-                "type": "STRING",
-                "value": "X"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "number": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "integer"
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[0-9]"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[0-9]"
-                }
-              },
-              {
-                "type": "STRING",
-                "value": "."
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[0-9]"
-                }
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "E"
-                      },
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "+"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "-"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "[0-9]"
-                      },
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[0-9]"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "integer": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[0-9]"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[0-9]"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[0-9A-F]"
-              },
-              {
-                "type": "STRING",
-                "value": "H"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "kBy": {
-      "type": "STRING",
-      "value": "BY"
-    },
-    "kDo": {
-      "type": "STRING",
-      "value": "DO"
-    },
-    "kIf": {
-      "type": "STRING",
-      "value": "IF"
-    },
-    "kIn": {
-      "type": "STRING",
-      "value": "IN"
-    },
-    "kIs": {
-      "type": "STRING",
-      "value": "IS"
-    },
-    "kOf": {
-      "type": "STRING",
-      "value": "OF"
-    },
-    "kOr": {
-      "type": "STRING",
-      "value": "OR"
-    },
-    "kTo": {
-      "type": "STRING",
-      "value": "TO"
-    },
-    "kDiv": {
-      "type": "STRING",
-      "value": "DIV"
-    },
-    "kEnd": {
-      "type": "STRING",
-      "value": "END"
-    },
-    "kFor": {
-      "type": "STRING",
-      "value": "FOR"
-    },
-    "kMod": {
-      "type": "STRING",
-      "value": "MOD"
-    },
-    "kNil": {
-      "type": "STRING",
-      "value": "NIL"
-    },
-    "kVar": {
-      "type": "STRING",
-      "value": "VAR"
-    },
-    "kCase": {
-      "type": "STRING",
-      "value": "CASE"
-    },
-    "kElse": {
-      "type": "STRING",
-      "value": "ELSE"
-    },
-    "kThen": {
-      "type": "STRING",
-      "value": "THEN"
-    },
-    "kTrue": {
-      "type": "STRING",
-      "value": "TRUE"
-    },
-    "kType": {
-      "type": "STRING",
-      "value": "TYPE"
-    },
-    "kArray": {
-      "type": "STRING",
-      "value": "ARRAY"
-    },
-    "kBegin": {
-      "type": "STRING",
-      "value": "BEGIN"
-    },
-    "kConst": {
-      "type": "STRING",
-      "value": "CONST"
-    },
-    "kFalse": {
-      "type": "STRING",
-      "value": "FALSE"
-    },
-    "kUntil": {
-      "type": "STRING",
-      "value": "UNTIL"
-    },
-    "kWhile": {
-      "type": "STRING",
-      "value": "WHILE"
-    },
-    "kElseif": {
-      "type": "STRING",
-      "value": "ELSEIF"
-    },
-    "kImport": {
-      "type": "STRING",
-      "value": "IMPORT"
-    },
-    "kModule": {
-      "type": "STRING",
-      "value": "MODULE"
-    },
-    "kRecord": {
-      "type": "STRING",
-      "value": "RECORD"
-    },
-    "kRepeat": {
-      "type": "STRING",
-      "value": "REPEAT"
-    },
-    "kReturn": {
-      "type": "STRING",
-      "value": "RETURN"
-    },
-    "kPointer": {
-      "type": "STRING",
-      "value": "POINTER"
-    },
-    "kProcedure": {
-      "type": "STRING",
-      "value": "PROCEDURE"
-    },
-    "ident": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[a-zA-Z]"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[a-zA-Z]"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[0-9]"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]"
-          }
-        ]
-      }
-    },
     "module": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "kModule"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ident"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
+          "name": "module_header"
         },
         {
           "type": "CHOICE",
@@ -425,6 +93,32 @@
             }
           ]
         },
+        {
+          "type": "SYMBOL",
+          "name": "module_footer"
+        }
+      ]
+    },
+    "module_header": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kModule"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ident"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "module_footer": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "SYMBOL",
           "name": "kEnd"
@@ -890,6 +584,10 @@
           ]
         },
         {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
@@ -983,34 +681,47 @@
       ]
     },
     "qualident": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "ident"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "qualifier",
+                "content": {
                   "type": "SYMBOL",
                   "name": "ident"
-                },
-                {
-                  "type": "STRING",
-                  "value": "."
                 }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ident"
-        }
-      ]
+              },
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "FIELD",
+                "name": "property",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "ident"
+                }
+              }
+            ]
+          }
+        ]
+      }
     },
     "ident_def": {
       "type": "SEQ",
@@ -1472,20 +1183,24 @@
       ]
     },
     "designator": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "qualident"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "selector"
+            "name": "qualident"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "selector"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "selector": {
       "type": "CHOICE",
@@ -2176,12 +1891,340 @@
           "name": "kEnd"
         }
       ]
+    },
+    "string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\"[^\"\\n]*\""
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[0-9]"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9A-F]"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "X"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "integer"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[0-9]"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9]"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9]"
+                }
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "E"
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": "+"
+                          },
+                          {
+                            "type": "STRING",
+                            "value": "-"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "[0-9]"
+                      },
+                      {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[0-9]"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "integer": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[0-9]"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9]"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[0-9A-F]"
+              },
+              {
+                "type": "STRING",
+                "value": "H"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "kBy": {
+      "type": "STRING",
+      "value": "BY"
+    },
+    "kDo": {
+      "type": "STRING",
+      "value": "DO"
+    },
+    "kIf": {
+      "type": "STRING",
+      "value": "IF"
+    },
+    "kIn": {
+      "type": "STRING",
+      "value": "IN"
+    },
+    "kIs": {
+      "type": "STRING",
+      "value": "IS"
+    },
+    "kOf": {
+      "type": "STRING",
+      "value": "OF"
+    },
+    "kOr": {
+      "type": "STRING",
+      "value": "OR"
+    },
+    "kTo": {
+      "type": "STRING",
+      "value": "TO"
+    },
+    "kDiv": {
+      "type": "STRING",
+      "value": "DIV"
+    },
+    "kEnd": {
+      "type": "STRING",
+      "value": "END"
+    },
+    "kFor": {
+      "type": "STRING",
+      "value": "FOR"
+    },
+    "kMod": {
+      "type": "STRING",
+      "value": "MOD"
+    },
+    "kNil": {
+      "type": "STRING",
+      "value": "NIL"
+    },
+    "kVar": {
+      "type": "STRING",
+      "value": "VAR"
+    },
+    "kCase": {
+      "type": "STRING",
+      "value": "CASE"
+    },
+    "kElse": {
+      "type": "STRING",
+      "value": "ELSE"
+    },
+    "kThen": {
+      "type": "STRING",
+      "value": "THEN"
+    },
+    "kTrue": {
+      "type": "STRING",
+      "value": "TRUE"
+    },
+    "kType": {
+      "type": "STRING",
+      "value": "TYPE"
+    },
+    "kArray": {
+      "type": "STRING",
+      "value": "ARRAY"
+    },
+    "kBegin": {
+      "type": "STRING",
+      "value": "BEGIN"
+    },
+    "kConst": {
+      "type": "STRING",
+      "value": "CONST"
+    },
+    "kFalse": {
+      "type": "STRING",
+      "value": "FALSE"
+    },
+    "kUntil": {
+      "type": "STRING",
+      "value": "UNTIL"
+    },
+    "kWhile": {
+      "type": "STRING",
+      "value": "WHILE"
+    },
+    "kElseif": {
+      "type": "STRING",
+      "value": "ELSEIF"
+    },
+    "kImport": {
+      "type": "STRING",
+      "value": "IMPORT"
+    },
+    "kModule": {
+      "type": "STRING",
+      "value": "MODULE"
+    },
+    "kRecord": {
+      "type": "STRING",
+      "value": "RECORD"
+    },
+    "kRepeat": {
+      "type": "STRING",
+      "value": "REPEAT"
+    },
+    "kReturn": {
+      "type": "STRING",
+      "value": "RETURN"
+    },
+    "kPointer": {
+      "type": "STRING",
+      "value": "POINTER"
+    },
+    "kProcedure": {
+      "type": "STRING",
+      "value": "PROCEDURE"
+    },
+    "ident": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z]"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[a-zA-Z]"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[0-9]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]"
+          }
+        ]
+      }
     }
   },
   "extras": [
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "PATTERN",
+      "value": "\\s"
     }
   ],
   "conflicts": [],

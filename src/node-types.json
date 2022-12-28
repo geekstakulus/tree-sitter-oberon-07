@@ -636,6 +636,91 @@
     }
   },
   {
+    "type": "module",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_decls",
+          "named": true
+        },
+        {
+          "type": "import_list",
+          "named": true
+        },
+        {
+          "type": "kBegin",
+          "named": true
+        },
+        {
+          "type": "module_footer",
+          "named": true
+        },
+        {
+          "type": "module_header",
+          "named": true
+        },
+        {
+          "type": "procedure_decls",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
+          "named": true
+        },
+        {
+          "type": "type_decls",
+          "named": true
+        },
+        {
+          "type": "variable_decls",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "module_footer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "module_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ident",
+          "named": true
+        },
+        {
+          "type": "kModule",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mul_operator",
     "named": true,
     "fields": {},
@@ -841,10 +926,31 @@
   {
     "type": "qualident",
     "named": true,
-    "fields": {},
+    "fields": {
+      "property": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "ident",
@@ -1036,11 +1142,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "string",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "struct_type",
@@ -1444,6 +1545,10 @@
   },
   {
     "type": "kWhile",
+    "named": true
+  },
+  {
+    "type": "string",
     "named": true
   },
   {
