@@ -4,10 +4,17 @@ comment
 
 (* This is a comment *)
 (* This is another comment *)
-
+MODULE Comment;
+END Comment.
 ---
 
 (module 
   (comment) 
-  (comment)) 
+  (comment)
+  (module_header
+    (kModule)
+    (ident))
+  (module_footer
+    (kEnd)
+    (ident)))
 
