@@ -1,0 +1,16 @@
+====
+module
+====
+
+MODULE Hello;
+END Hello.
+---
+
+(module 
+  (module_header
+    (kModule)
+    (ident)) 
+  (module_footer
+    (kEnd)
+    (ident)))
+
