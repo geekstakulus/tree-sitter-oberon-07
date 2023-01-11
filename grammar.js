@@ -391,11 +391,11 @@ module.exports = grammar({
 
     // case_statement = "CASE" expression "OF" case {"|" case} "END"
     case_statement: $ => seq(
-      $.kCase, $.expression, $.kOf, optional($.case), repeat(seq('|', optional($.case))), $.kEnd
+      $.kCase, $.expression, $.kOf, optional($.case_clause), repeat(seq('|', optional($.case_clause))), $.kEnd
     ),
 
     // case = [case_label_list ":" statement_sequence]
-    case: $ => seq($.case_label_list, ':', optional($.statement_seq)),
+    case_clause: $ => seq($.case_label_list, ':', optional($.statement_seq)),
 
     // case_label_list = label_range {"," label_range}
     case_label_list: $ => seq(
