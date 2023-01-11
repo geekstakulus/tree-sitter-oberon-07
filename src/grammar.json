@@ -1594,7 +1594,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "case"
+              "name": "case_test"
             },
             {
               "type": "BLANK"
@@ -1615,7 +1615,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "case"
+                    "name": "case_test"
                   },
                   {
                     "type": "BLANK"
@@ -1631,7 +1631,7 @@
         }
       ]
     },
-    "case": {
+    "case_test": {
       "type": "SEQ",
       "members": [
         {

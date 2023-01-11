@@ -91,25 +91,6 @@
     }
   },
   {
-    "type": "case",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "case_label_list",
-          "named": true
-        },
-        {
-          "type": "statement_seq",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "case_label_list",
     "named": true,
     "fields": {},
@@ -133,7 +114,7 @@
       "required": true,
       "types": [
         {
-          "type": "case",
+          "type": "case_test",
           "named": true
         },
         {
@@ -150,6 +131,25 @@
         },
         {
           "type": "kOf",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_test",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case_label_list",
+          "named": true
+        },
+        {
+          "type": "statement_seq",
           "named": true
         }
       ]
