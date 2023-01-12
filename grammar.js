@@ -113,9 +113,9 @@ module.exports = grammar({
     // const_expression = expression
     const_expression: $ =>  $.expression,
 
-    // type_decl = ident_def "=" struct_type
+    // type_decl = ident_def "=" (qualident | struct_type)
     type_decl: $ => seq(
-      $.ident_def, '=', $.struct_type
+      $.ident_def, '=', choice($.qualident, $.struct_type)
     ),
 
     // struct_type = array_type | record_type | pointer_type | procedure_type

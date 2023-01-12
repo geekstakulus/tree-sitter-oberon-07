@@ -317,8 +317,17 @@
           "value": "="
         },
         {
-          "type": "SYMBOL",
-          "name": "struct_type"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "qualident"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "struct_type"
+            }
+          ]
         }
       ]
     },
@@ -1594,7 +1603,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "case_test"
+              "name": "case_clause"
             },
             {
               "type": "BLANK"
@@ -1615,7 +1624,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "case_test"
+                    "name": "case_clause"
                   },
                   {
                     "type": "BLANK"
@@ -1631,7 +1640,7 @@
         }
       ]
     },
-    "case_test": {
+    "case_clause": {
       "type": "SEQ",
       "members": [
         {
