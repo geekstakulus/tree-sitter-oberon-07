@@ -14,3 +14,45 @@ END Hello.
     (kEnd)
     (ident)))
 
+====================
+module single import
+====================
+
+MODULE Hello;
+  IMPORT In;
+END Hello.
+---
+
+(module 
+  (module_header
+    (kModule)
+    (ident)) 
+  (import_list
+    (kImport)
+    (import
+      (ident)))
+  (module_footer
+    (kEnd)
+    (ident)))
+
+===============================
+module single import with alias
+===============================
+
+MODULE Hello;
+  IMPORT In := IOIn;
+END Hello.
+---
+
+(module 
+  (module_header
+    (kModule)
+    (ident)) 
+  (import_list
+    (kImport)
+    (import
+      (ident)
+      (ident)))
+  (module_footer
+    (kEnd)
+    (ident)))
