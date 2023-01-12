@@ -317,17 +317,8 @@
           "value": "="
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "qualident"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "struct_type"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type"
         }
       ]
     },

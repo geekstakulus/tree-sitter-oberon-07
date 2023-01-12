@@ -1221,11 +1221,7 @@
           "named": true
         },
         {
-          "type": "qualident",
-          "named": true
-        },
-        {
-          "type": "struct_type",
+          "type": "type",
           "named": true
         }
       ]
