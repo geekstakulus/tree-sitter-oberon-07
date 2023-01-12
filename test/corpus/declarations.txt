@@ -1,5 +1,5 @@
 ===============
-Variables
+Simple Variable
 ===============
 
 MODULE Variables;
@@ -21,6 +21,75 @@ END Variables.
       (type
         (qualident
           (ident)))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+===============
+Array Variable
+===============
+
+MODULE Variables;
+  VAR
+    i : ARRAY 12 OF INTEGER;
+    arr2 : ARRAY 4, 5 OF INTEGER ;
+END Variables.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (variable_decls
+    (kVar)
+    (variable_decl
+      (ident_list
+        (ident_def
+          (ident)))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+              (kOf)
+              (type
+                (qualident
+                  (ident)))))))
+    (variable_decl
+      (ident_list
+        (ident_def
+          (ident)))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+              (kOf)
+              (type
+                (qualident
+                  (ident))))))))
     (module_footer
       (kEnd)
       (ident)))
@@ -73,8 +142,9 @@ END QualidentType.
     (type_decl
       (ident_def
         (ident))
-      (qualident
-        (ident))))
+      (type
+        (qualident
+          (ident)))))
     (module_footer
       (kEnd)
       (ident)))
@@ -87,6 +157,11 @@ MODULE ArrayType;
   TYPE
     i = ARRAY 1 OF INTEGER;
     x = ARRAY 1, 4 OF REAL;
+    arr = ARRAY 5 OF ARRAY 3 OF STRING;
+    arr2 = ARRAY 4 OF RECORD END;
+    arr3 = ARRAY 4 OF RECORD (Base) END;
+    arr4 = ARRAY 4 OF RECORD (Base) name : STRING END;
+    arr5 = ARRAY 4 OF POINTER TO StructType;
 END ArrayType.
 ---
 
@@ -99,47 +174,182 @@ END ArrayType.
     (type_decl
       (ident_def
         (ident))
-      (struct_type
-        (array_type
-          (kArray)
-          (length
-            (const_expression
-              (expression
-                (simple_expression
-                  (term
-                    (factor
-                      (number
-                        (integer))))))))
-            (kOf)
-            (type
-              (qualident
-                (ident))))))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+              (kOf)
+              (type
+                (qualident
+                  (ident)))))))
     (type_decl
       (ident_def
         (ident))
-      (struct_type
-        (array_type
-          (kArray)
-          (length
-            (const_expression
-              (expression
-                (simple_expression
-                  (term
-                    (factor
-                      (number
-                        (integer))))))))
-          (length
-            (const_expression
-              (expression
-                (simple_expression
-                  (term
-                    (factor
-                      (number
-                        (integer))))))))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+              (kOf)
+              (type
+                (qualident
+                  (ident)))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
             (kOf)
             (type
-              (qualident
-                (ident)))))))
+              (struct_type
+                (array_type
+                  (kArray)
+                  (length
+                    (const_expression
+                      (expression
+                        (simple_expression
+                          (term
+                            (factor
+                              (number
+                                (integer))))))))
+                  (kOf)
+                  (type
+                    (qualident
+                      (ident))))))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (kOf)
+            (type
+              (struct_type
+                (record_type
+                  (kRecord)
+                  (kEnd))))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (kOf)
+            (type
+              (struct_type
+                (record_type
+                  (kRecord)
+                  (base_type
+                    (qualident
+                      (ident)))
+                  (kEnd))))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (kOf)
+            (type
+              (struct_type
+                (record_type
+                  (kRecord)
+                  (base_type
+                    (qualident
+                      (ident)))
+                  (field_list_seq
+                    (field_list
+                      (ident_list
+                        (ident_def
+                          (ident)))
+                      (type
+                        (qualident
+                          (ident)))))
+                  (kEnd))))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (array_type
+            (kArray)
+            (length
+              (const_expression
+                (expression
+                  (simple_expression
+                    (term
+                      (factor
+                        (number
+                          (integer))))))))
+            (kOf)
+            (type
+              (struct_type
+                (pointer_type
+                  (kPointer)
+                  (kTo)
+                  (type
+                    (qualident
+                      (ident)))))))))))
     (module_footer
       (kEnd)
       (ident)))
