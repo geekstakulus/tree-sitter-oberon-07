@@ -1,5 +1,5 @@
 ===============
-variables
+Variables
 ===============
 
 MODULE Variables;
@@ -21,6 +21,125 @@ END Variables.
       (type
         (qualident
           (ident)))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+===============
+Constants
+===============
+
+MODULE Constants;
+  CONST
+    i = "hello, world";
+END Constants.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (const_decls
+    (kConst)
+    (const_decl
+        (ident_def
+          (ident))
+        (const_expression
+          (expression
+            (simple_expression
+              (term
+                (factor
+                  (string))))))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+===============
+Qualident Type
+===============
+
+MODULE QualidentType;
+  TYPE
+    i = INTEGER;
+END QualidentType.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (type_decls
+    (kType)
+    (type_decl
+      (ident_def
+        (ident))
+      (qualident
+        (ident))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+================
+Array Type
+================
+
+MODULE ArrayType;
+  TYPE
+    i = ARRAY 1 OF INTEGER;
+    x = ARRAY 1, 4 OF REAL;
+END ArrayType.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (type_decls
+    (kType)
+    (type_decl
+      (ident_def
+        (ident))
+      (struct_type
+        (array_type
+          (kArray)
+          (length
+            (const_expression
+              (expression
+                (simple_expression
+                  (term
+                    (factor
+                      (number
+                        (integer))))))))
+            (kOf)
+            (type
+              (qualident
+                (ident))))))
+    (type_decl
+      (ident_def
+        (ident))
+      (struct_type
+        (array_type
+          (kArray)
+          (length
+            (const_expression
+              (expression
+                (simple_expression
+                  (term
+                    (factor
+                      (number
+                        (integer))))))))
+          (length
+            (const_expression
+              (expression
+                (simple_expression
+                  (term
+                    (factor
+                      (number
+                        (integer))))))))
+            (kOf)
+            (type
+              (qualident
+                (ident)))))))
     (module_footer
       (kEnd)
       (ident)))
