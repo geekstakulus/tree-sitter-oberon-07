@@ -206,9 +206,9 @@ module.exports = grammar({
       seq(field("qualifier", $.ident), '.', field("property", $.ident)),
     )),
 
-    // ident_def = ident ["*"]
+    // ident_def = ident ["*" | "-"]
     ident_def: $ => seq(
-      $.ident, optional('*')
+      $.ident, optional(choice('*', '-'))
     ),
 
     // variable_decl = ident_list ":" type
