@@ -734,8 +734,17 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "*"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kStar"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kMinus"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -999,12 +1008,12 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "+"
+                  "type": "SYMBOL",
+                  "name": "kPlus"
                 },
                 {
-                  "type": "STRING",
-                  "value": "-"
+                  "type": "SYMBOL",
+                  "name": "kMinus"
                 }
               ]
             },
@@ -1039,12 +1048,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "+"
+          "type": "SYMBOL",
+          "name": "kPlus"
         },
         {
-          "type": "STRING",
-          "value": "-"
+          "type": "SYMBOL",
+          "name": "kMinus"
         },
         {
           "type": "SYMBOL",
@@ -1081,12 +1090,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "*"
+          "type": "SYMBOL",
+          "name": "kStar"
         },
         {
-          "type": "STRING",
-          "value": "/"
+          "type": "SYMBOL",
+          "name": "kSlash"
         },
         {
           "type": "SYMBOL",
@@ -1569,8 +1578,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "END"
+          "type": "SYMBOL",
+          "name": "kEnd"
         }
       ]
     },
@@ -2043,6 +2052,22 @@
           }
         }
       ]
+    },
+    "kPlus": {
+      "type": "STRING",
+      "value": "+"
+    },
+    "kStar": {
+      "type": "STRING",
+      "value": "*"
+    },
+    "kMinus": {
+      "type": "STRING",
+      "value": "-"
+    },
+    "kSlash": {
+      "type": "STRING",
+      "value": "/"
     },
     "kBy": {
       "type": "STRING",

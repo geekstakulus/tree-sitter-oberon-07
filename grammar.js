@@ -208,7 +208,7 @@ module.exports = grammar({
 
     // ident_def = ident ["*" | "-"]
     ident_def: $ => seq(
-      $.ident, optional(choice('*', '-'))
+      $.ident, optional(choice($.kStar, $.kMinus))
     ),
 
     // variable_decl = ident_list ":" type
@@ -266,8 +266,8 @@ module.exports = grammar({
     // simple_expression = ["+" | "-"] term {add_operator term}
     simple_expression: $ => seq(
       optional(choice(
-        '+',
-        '-'
+        $.kPlus,
+        $.kMinus
       )),
       $.term,
       repeat(seq(
@@ -277,8 +277,8 @@ module.exports = grammar({
 
     // add_operator = "+" | "-" | "OR"
     add_operator: $ => choice(
-      '+',
-      '-',
+      $.kPlus,
+      $.kMinus,
       $.kOr
     ),
 
@@ -289,8 +289,8 @@ module.exports = grammar({
 
     // mul_operator = "*" | "/" | "DIV" | "MOD" | "&"
     mul_operator: $ => choice(
-      '*',
-      '/',
+      $.kStar,
+      $.kSlash,
       $.kDiv,
       $.kMod,
       '&'
@@ -386,7 +386,7 @@ module.exports = grammar({
       $.kIf, $.expression, $.kThen, optional($.statement_seq),
       repeat(seq($.kElseif, $.expression, $.kThen, optional($.statement_seq))),
       optional(seq($.kElse, optional($.statement_seq))),
-      'END'
+      $.kEnd
     ),
 
     // case_statement = "CASE" expression "OF" case {"|" case} "END"
@@ -446,6 +446,12 @@ module.exports = grammar({
       token(seq(hex_digit, 'H'))
     ),
     
+    // mathematical operators
+    kPlus:  $ => '+',
+    kStar:  $ => '*',
+    kMinus: $ => '-',
+    kSlash: $ => '/',
+
     // keywords
     kBy: $ => 'BY',
     kDo: $ => 'DO',

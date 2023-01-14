@@ -20,10 +20,18 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
+          "type": "kMinus",
+          "named": true
+        },
+        {
           "type": "kOr",
+          "named": true
+        },
+        {
+          "type": "kPlus",
           "named": true
         }
       ]
@@ -478,11 +486,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "ident",
+          "named": true
+        },
+        {
+          "type": "kMinus",
+          "named": true
+        },
+        {
+          "type": "kStar",
           "named": true
         }
       ]
@@ -521,6 +537,10 @@
         },
         {
           "type": "kElseif",
+          "named": true
+        },
+        {
+          "type": "kEnd",
           "named": true
         },
         {
@@ -574,11 +594,6 @@
   },
   {
     "type": "integer",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kEnd",
     "named": true,
     "fields": {}
   },
@@ -734,6 +749,14 @@
         },
         {
           "type": "kMod",
+          "named": true
+        },
+        {
+          "type": "kSlash",
+          "named": true
+        },
+        {
+          "type": "kStar",
           "named": true
         }
       ]
@@ -1083,6 +1106,14 @@
           "named": true
         },
         {
+          "type": "kMinus",
+          "named": true
+        },
+        {
+          "type": "kPlus",
+          "named": true
+        },
+        {
           "type": "term",
           "named": true
         }
@@ -1336,19 +1367,7 @@
     "named": false
   },
   {
-    "type": "*",
-    "named": false
-  },
-  {
-    "type": "+",
-    "named": false
-  },
-  {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "-",
     "named": false
   },
   {
@@ -1357,10 +1376,6 @@
   },
   {
     "type": "..",
-    "named": false
-  },
-  {
-    "type": "/",
     "named": false
   },
   {
@@ -1393,10 +1408,6 @@
   },
   {
     "type": ">=",
-    "named": false
-  },
-  {
-    "type": "END",
     "named": false
   },
   {
@@ -1456,6 +1467,10 @@
     "named": true
   },
   {
+    "type": "kEnd",
+    "named": true
+  },
+  {
     "type": "kFalse",
     "named": true
   },
@@ -1480,6 +1495,10 @@
     "named": true
   },
   {
+    "type": "kMinus",
+    "named": true
+  },
+  {
     "type": "kMod",
     "named": true
   },
@@ -1500,6 +1519,10 @@
     "named": true
   },
   {
+    "type": "kPlus",
+    "named": true
+  },
+  {
     "type": "kPointer",
     "named": true
   },
@@ -1517,6 +1540,14 @@
   },
   {
     "type": "kReturn",
+    "named": true
+  },
+  {
+    "type": "kSlash",
+    "named": true
+  },
+  {
+    "type": "kStar",
     "named": true
   },
   {
