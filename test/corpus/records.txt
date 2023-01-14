@@ -1,0 +1,109 @@
+================
+Record Type
+================
+
+MODULE RecordType;
+  TYPE
+    Type1 = RECORD 
+    END;
+END RecordType.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (type_decls
+    (kType)
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (record_type
+            (kRecord)
+            (kEnd))))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+=====================
+Record Type Extension
+=====================
+
+MODULE RecordType;
+  TYPE
+    Type2 = RECORD (Base) 
+    END;
+END RecordType.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (type_decls
+    (kType)
+    (type_decl
+      (ident_def
+        (ident))
+      (type
+        (struct_type
+          (record_type
+            (kRecord)
+            (base_type
+              (qualident
+                (ident)))
+            (kEnd))))))
+    (module_footer
+      (kEnd)
+      (ident)))
+
+==============================
+Record With Export and Private
+==============================
+
+MODULE RecordType;
+  TYPE
+    Type3* = RECORD
+      name- : STRING;
+      surname* : STRING
+    END;
+END RecordType.
+---
+
+(module
+  (module_header
+    (kModule)
+    (ident))
+  (type_decls
+    (kType)
+    (type_decl
+      (ident_def
+        (ident)
+        (kStar))
+      (type
+        (struct_type
+          (record_type
+            (kRecord)
+            (field_list_seq
+              (field_list
+                (ident_list
+                  (ident_def
+                    (ident)
+                    (kMinus)))
+                (type
+                  (qualident
+                    (ident))))
+              (field_list
+                (ident_list
+                  (ident_def
+                    (ident)
+                    (kStar)))
+                (type
+                  (qualident
+                    (ident)))))
+            (kEnd))))))
+    (module_footer
+      (kEnd)
+      (ident)))
