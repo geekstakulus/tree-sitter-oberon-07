@@ -93,16 +93,18 @@ END RecordType.
                     (ident)
                     (kMinus)))
                 (type
-                  (qualident
-                    (ident))))
+                  (base_type
+                    (qualident
+                      (ident)))))
               (field_list
                 (ident_list
                   (ident_def
                     (ident)
                     (kStar)))
                 (type
-                  (qualident
-                    (ident)))))
+                  (base_type
+                    (qualident
+                      (ident))))))
             (kEnd))))))
     (module_footer
       (kEnd)

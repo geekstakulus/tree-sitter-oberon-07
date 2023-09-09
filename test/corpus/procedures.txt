@@ -12,18 +12,17 @@ END Procedures.
   (module_header
     (kModule)
     (ident))
-  (procedure_decls
-    (procedure_decl
-      (procedure_heading
-        (kProcedure)
-        (ident_def
-          (ident)))
-      (procedure_body
-        (kEnd))
-      (ident)))
-    (module_footer
-      (kEnd)
-      (ident)))
+  (procedure_decl
+    (procedure_heading
+      (kProcedure)
+      (ident_def
+        (ident)))
+    (procedure_body
+      (kEnd))
+    (ident))
+  (module_footer
+    (kEnd)
+    (ident)))
 
 ====================
 Procedure With Begin
@@ -40,16 +39,15 @@ END Procedures.
   (module_header
     (kModule)
     (ident))
-  (procedure_decls
-    (procedure_decl
-      (procedure_heading
-        (kProcedure)
-        (ident_def
-          (ident)))
-      (procedure_body
-        (kBegin)
-        (kEnd))
-      (ident)))
-    (module_footer
-      (kEnd)
-      (ident)))
+  (procedure_decl
+    (procedure_heading
+      (kProcedure)
+      (ident_def
+        (ident)))
+    (procedure_body
+      (kBegin)
+      (kEnd))
+    (ident))
+  (module_footer
+    (kEnd)
+    (ident)))
