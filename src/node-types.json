@@ -624,11 +624,6 @@
     }
   },
   {
-    "type": "integer",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "label",
     "named": true,
     "fields": {},
@@ -1476,6 +1471,10 @@
   },
   {
     "type": "ident",
+    "named": true
+  },
+  {
+    "type": "integer",
     "named": true
   },
   {

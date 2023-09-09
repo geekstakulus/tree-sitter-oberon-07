@@ -12,6 +12,11 @@ const
   // ident = letter {letter | digit}
   identifier = seq(letter, repeat(choice(letter, digit))),
 
+  // int_literal = digit {digit} | digit {hex_digit} "H"
+  int_literal = choice(
+    seq(digit, repeat(digit)),
+    seq(digit, repeat(hex_digit), 'H')
+  ),
 
   // scale_factor = "E" ["+" | "-"] digit {digit}
   scale_factor = seq('E', choice('+', '-'), digit, repeat(digit)),
@@ -469,8 +474,7 @@ module.exports = grammar({
     // for_statement = "FOR" ident ":=" expression "TO" expression ["BY" const_expression]
     //                 "DO" statement_seq "END"
     for_statement: $ => seq(
-      $.kFor, $.ident, ':=', $.expression, $.kTo, $.expression,
-      optional(seq($.kBy, $.const_expression)),
+      $.kFor, $.ident, ':=', $.expression, $.kTo, $.expression, optional(seq($.kBy, $.const_expression)),
       $.kDo, seq( /* statement_seq hack */
         optional($.statement),
         repeat(seq(
@@ -486,12 +490,8 @@ module.exports = grammar({
     // real number
     real: $ => token(real_number),
 
-    // integer = digit {digit} | digit {hex_digit} "H"
-    integer: $ => choice(
-      token(seq(digit, repeat(digit))),
-      token(seq(hex_digit, 'H'))
-    ),
-    
+    integer: $ => token(int_literal),
+
     // mathematical operators
     kPlus:  $ => '+',
     kStar:  $ => '*',

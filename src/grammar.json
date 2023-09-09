@@ -2303,11 +2303,11 @@
       }
     },
     "integer": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
             "type": "SEQ",
             "members": [
               {
@@ -2322,16 +2322,20 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
+          },
+          {
             "type": "SEQ",
             "members": [
               {
                 "type": "PATTERN",
-                "value": "[0-9A-F]"
+                "value": "[0-9]"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9A-F]"
+                }
               },
               {
                 "type": "STRING",
@@ -2339,8 +2343,8 @@
               }
             ]
           }
-        }
-      ]
+        ]
+      }
     },
     "kPlus": {
       "type": "STRING",
