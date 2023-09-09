@@ -419,17 +419,24 @@
   {
     "type": "formal_params",
     "named": true,
-    "fields": {},
+    "fields": {
+      "returntype": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "qualident",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
           "type": "fp_section",
-          "named": true
-        },
-        {
-          "type": "qualident",
           "named": true
         }
       ]
@@ -461,19 +468,32 @@
   {
     "type": "fp_section",
     "named": true,
-    "fields": {},
+    "fields": {
+      "param": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      },
+      "paramtype": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "formal_type",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "formal_type",
-          "named": true
-        },
-        {
-          "type": "ident",
-          "named": true
-        },
         {
           "type": "kVar",
           "named": true
@@ -561,16 +581,27 @@
   {
     "type": "import",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "ident",
-          "named": true
-        }
-      ]
+    "fields": {
+      "impmodule": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      },
+      "modulealias": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -667,7 +698,7 @@
           "named": true
         },
         {
-          "type": "kBegin",
+          "type": "module_body",
           "named": true
         },
         {
@@ -679,11 +710,7 @@
           "named": true
         },
         {
-          "type": "procedure_decls",
-          "named": true
-        },
-        {
-          "type": "statement",
+          "type": "procedure_decl",
           "named": true
         },
         {
@@ -698,7 +725,7 @@
     }
   },
   {
-    "type": "module_footer",
+    "type": "module_body",
     "named": true,
     "fields": {},
     "children": {
@@ -706,9 +733,35 @@
       "required": true,
       "types": [
         {
-          "type": "ident",
+          "type": "kBegin",
           "named": true
         },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "module_footer",
+    "named": true,
+    "fields": {
+      "modulename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
           "type": "kEnd",
           "named": true
@@ -719,15 +772,22 @@
   {
     "type": "module_header",
     "named": true,
-    "fields": {},
+    "fields": {
+      "modulename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "ident",
-          "named": true
-        },
         {
           "type": "kModule",
           "named": true
@@ -768,10 +828,14 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "real",
           "named": true
         }
       ]
@@ -829,7 +893,7 @@
           "named": true
         },
         {
-          "type": "procedure_decls",
+          "type": "procedure_decl",
           "named": true
         },
         {
@@ -869,36 +933,28 @@
   {
     "type": "procedure_decl",
     "named": true,
-    "fields": {},
+    "fields": {
+      "procname": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "ident",
-          "named": true
-        },
         {
           "type": "procedure_body",
           "named": true
         },
         {
           "type": "procedure_heading",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "procedure_decls",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "procedure_decl",
           "named": true
         }
       ]
@@ -985,15 +1041,22 @@
   {
     "type": "record_type",
     "named": true,
-    "fields": {},
+    "fields": {
+      "parentrec": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "base_type",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "base_type",
-          "named": true
-        },
         {
           "type": "field_list_seq",
           "named": true
@@ -1214,7 +1277,7 @@
       "required": true,
       "types": [
         {
-          "type": "qualident",
+          "type": "base_type",
           "named": true
         },
         {
@@ -1564,7 +1627,7 @@
     "named": true
   },
   {
-    "type": "pragma",
+    "type": "real",
     "named": true
   },
   {

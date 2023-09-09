@@ -6,7 +6,6 @@ const
   // string = """ {character} """ | digit {hex_digit} "X"
   string_literal = choice(
     /"[^"\n]*"/,
-    /'[^'\n]*'/, // This isn't really valid in Oberon, but some dialects support it, XDS for instance
     seq(digit, repeat(hex_digit), 'X')
   ),
 
@@ -18,15 +17,15 @@ const
   scale_factor = seq('E', choice('+', '-'), digit, repeat(digit)),
 
   // real = digit {digit} "." {digit} [scale_factor]
-  real = seq(
+  real_number = seq(
     digit, repeat(digit), '.', 
     repeat(digit), optional(scale_factor)
   );
 
 module.exports = grammar({
-  name: 'oberon2',
+  name: 'oberon07',
 
-  extras: $ => [$.comment, /\s/, $.pragma],
+  extras: $ => [$.comment, /\s/],
 
   word: $ => $.ident,
 
@@ -39,25 +38,31 @@ module.exports = grammar({
     // "END" ident "."
     module: $ => seq(
       $.module_header,
+      // declaration_seq
       optional($.import_list),
       optional($.const_decls),
       optional($.type_decls),
       optional($.variable_decls),
-      repeat($.procedure_decls),
-      optional(seq(
-        $.kBegin,
-        seq( /* statement_seq hack */
-        optional($.statement),
-        repeat(seq(
-          ';',
-          optional($.statement))))
-      )),
+      repeat($.procedure_decl),
+      // end declaration_seq
+      optional($.module_body),
       $.module_footer
     ),
-    module_header: $ => seq($.kModule, $.ident, ';'),
-    module_footer: $ => seq($.kEnd, $.ident, '.'),
 
-    // import_list = "IMPORT" import {"," import}
+    module_header: $ => seq($.kModule, field("modulename", $.ident), ';'),
+
+    module_footer: $ => seq($.kEnd, field("modulename", $.ident), '.'),
+
+    module_body: $ => seq(
+      $.kBegin,
+      seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+         ';',
+         optional($.statement))))
+    ),
+
+    // import_list = "IMPORT" import {"," import} ";"
     import_list: $ => seq(
       $.kImport,
       $.import,
@@ -70,58 +75,56 @@ module.exports = grammar({
 
     // import = ident [":=" ident]
     import: $ => seq(
-      $.ident,
+      field("modulealias", $.ident),
       optional(seq(
         ':=',
-        $.ident
+        field("impmodule", $.ident)
       ))
     ),
 
     // the following declarations are a bit of a hack
-    // because of the empty string problem with the previous
-    // one
+    // because tree-sitter doesn't permit empty productions
+    // besides the first rule
+    // This corresponds to the declaration_sequence in the grammar
 
-    // const_decls = "CONST" {const_decl ";"}
+    // const_decls = "CONST" {const_decl}
     const_decls: $ => seq(
       $.kConst, 
-      repeat(seq(
-        $.const_decl, ';'
-      ))
+      repeat($.const_decl)
     ),
 
-    // type_decls = "TYPE" {type_decl ";"}
+    // type_decls = "TYPE" {type_decl}
     type_decls: $=> seq(
       $.kType, 
-      repeat(seq(
-        $.type_decl, ';'
-      ))
+      repeat($.type_decl)
     ),
 
-    // variable_decls =["VAR" {variable_decl ";"}]
+    // variable_decls = "VAR" {variable_decl}
     variable_decls: $ => seq(
       $.kVar, 
-      repeat(seq(
-        $.variable_decl, ';'
-      ))
-    ),
-
-    // procedure_decls = procedure_decl ";"
-    procedure_decls: $ => seq(
-      $.procedure_decl, ';'
+      repeat($.variable_decl)
     ),
 
     // const_decl = ident_def "=" const_expresion
     const_decl: $ => seq(
-      $.ident_def, '=', $.const_expression
+      $.ident_def, "=", $.const_expression, ";"
     ),
 
     // const_expression = expression
     const_expression: $ =>  $.expression,
 
-    // type_decl = ident_def "=" (qualident | struct_type)
+    // type_decl = ident_def "=" type
     type_decl: $ => seq(
-      $.ident_def, '=', $.type
+      $.ident_def, '=', $.type, ";"
     ),
+
+    // type = base_type | struct_type
+    type: $ => choice(
+      $.base_type,
+      $.struct_type
+    ),
+    
+    base_type: $ => $.qualident,
 
     // struct_type = array_type | record_type | pointer_type | procedure_type
     struct_type: $ => choice(
@@ -144,7 +147,7 @@ module.exports = grammar({
       $.kRecord,
       optional(seq(
         '(',
-        $.base_type,
+        field("parentrec", $.base_type),
         ')'
       )),
       optional($.field_list_seq),
@@ -187,16 +190,16 @@ module.exports = grammar({
       )),
       ")",
       optional(seq(
-        ':', $.qualident
+        ':', field("returntype", $.qualident)
       ))
     ),
 
     // fp_section = ["VAR"] ident {"," ident} ":" formal_type
     fp_section: $ => seq(
       optional($.kVar),
-      $.ident, repeat(seq(',', $.ident)),
+      field("param", $.ident), repeat(seq(',', field("param", $.ident))),
       ':',
-      $.formal_type
+      field("paramtype", $.formal_type)
     ),
 
     // formal_type = {"ARRAY" "OF"} qualident
@@ -218,18 +221,12 @@ module.exports = grammar({
 
     // variable_decl = ident_list ":" type
     variable_decl: $ => seq(
-      $.ident_list, ':', $.type
-    ),
-
-    // type = qualident | struct_type
-    type: $ => choice(
-      $.qualident,
-      $.struct_type
+      $.ident_list, ':', $.type, ";"
     ),
 
     // procedure_decl = procedure_heading ";" procedure_body ident
     procedure_decl: $ => seq(
-      $.procedure_heading, ';', $.procedure_body, $.ident
+      $.procedure_heading, ';', $.procedure_body, field("procname", $.ident), ";"
     ),
 
     // procedure_heading = "PROCEDURE" ident_def [formal_params]
@@ -244,7 +241,7 @@ module.exports = grammar({
       optional($.const_decls),
       optional($.type_decls),
       optional($.variable_decls),
-      repeat($.procedure_decls),
+      repeat($.procedure_decl),
       optional(seq($.kBegin, seq( /* statement_seq hack */
         optional($.statement),
         repeat(seq(
@@ -412,7 +409,10 @@ module.exports = grammar({
 
     // case_statement = "CASE" expression "OF" case {"|" case} "END"
     case_statement: $ => seq(
-      $.kCase, $.expression, $.kOf, optional($.case_clause), repeat(seq('|', optional($.case_clause))), $.kEnd
+      $.kCase, $.expression, $.kOf, 
+      // case {"|" case}
+      optional($.case_clause), repeat(seq('|', optional($.case_clause))), 
+      $.kEnd
     ),
 
     // case = [case_label_list ":" statement_sequence]
@@ -462,7 +462,8 @@ module.exports = grammar({
         optional($.statement),
         repeat(seq(
           ';',
-          optional($.statement)))), $.kUntil, $.expression
+          optional($.statement)))), 
+      $.kUntil, $.expression
     ),
 
     // for_statement = "FOR" ident ":=" expression "TO" expression ["BY" const_expression]
@@ -474,12 +475,16 @@ module.exports = grammar({
         optional($.statement),
         repeat(seq(
           ';',
-          optional($.statement)))), $.kEnd
+          optional($.statement)))), 
+      $.kEnd
     ),
 
     string: $ => token(string_literal),
     // number = integer | real
-    number: $ => choice($.integer, token(real)),
+    number: $ => choice($.integer, $.real),
+
+    // real number
+    real: $ => token(real_number),
 
     // integer = digit {digit} | digit {hex_digit} "H"
     integer: $ => choice(
@@ -535,9 +540,6 @@ module.exports = grammar({
     kProcedure: $ => 'PROCEDURE',
 
     ident: $ => token(identifier),
-
-    // This is used by XDS Oberon-2
-    pragma: $ => token(seq(/[<][*]([^*]*[*]+[^>*])*[^*]*[*]+[>]/)),
 
     comment: $ => token(seq(/[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]/)),
   }
