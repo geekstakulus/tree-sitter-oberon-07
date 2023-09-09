@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-oberon2",
+  "name": "tree-sitter-oberon07",
   "version": "0.1.0",
-  "description": "Tree Sitter grammar for Oberon-2",
+  "description": "Tree Sitter grammar for Oberon-07",
   "main": "bindings/node",
   "scripts": {
     "build": "tree-sitter generate && node-gyp rebuild",
@@ -11,22 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viegasfh/tree-sitter-oberon-2.git"
+    "url": "git+https://github.com/geekstakulus/tree-sitter-oberon-07.git"
   },
   "keywords": [
     "tree-sitter",
-    "oberon-2",
+    "oberon-07",
     "parser"
   ],
   "author": "Fidel H Viegas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/viegasfh/tree-sitter-oberon-2/issues"
+    "url": "https://github.com/geekstakulus/tree-sitter-oberon-07/issues"
   },
-  "homepage": "https://github.com/viegasfh/tree-sitter-oberon-2#readme",
+  "homepage": "https://github.com/geekstakulus/tree-sitter-oberon-07#readme",
   "dependencies": {
     "nan": "^2.17.0",
-    "node-gyp": "^9.3.0"
+    "node-gyp": "^9.3.0",
+    "npm": "^10.0.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.7"
@@ -35,9 +36,14 @@
     "scope": "source.mod",
     "file-types": [
       "mod",
-      "def",
       "Mod",
-      "obn"
-    ]
+      "obn",
+      "ob7",
+      "ob07",
+      "o7"
+    ],
+    "first-line-regex": "+ob7",
+    "highlights": "queries/highlights.scm",
+    "locals": "queries/locals.scm"
   }
 }

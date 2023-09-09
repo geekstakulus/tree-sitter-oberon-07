@@ -111,7 +111,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         }
       ]
@@ -410,7 +410,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         }
       ]
@@ -552,7 +552,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         }
       ]
@@ -683,7 +683,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         },
         {
@@ -833,7 +833,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         },
         {
@@ -1049,7 +1049,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         }
       ]
@@ -1154,21 +1154,6 @@
         },
         {
           "type": "while_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "statement_seq",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "statement",
           "named": true
         }
       ]
@@ -1344,7 +1329,7 @@
           "named": true
         },
         {
-          "type": "statement_seq",
+          "type": "statement",
           "named": true
         }
       ]
@@ -1576,6 +1561,10 @@
   },
   {
     "type": "kWhile",
+    "named": true
+  },
+  {
+    "type": "pragma",
     "named": true
   },
   {

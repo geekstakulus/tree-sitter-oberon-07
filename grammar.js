@@ -6,6 +6,7 @@ const
   // string = """ {character} """ | digit {hex_digit} "X"
   string_literal = choice(
     /"[^"\n]*"/,
+    /'[^'\n]*'/, // This isn't really valid in Oberon, but some dialects support it, XDS for instance
     seq(digit, repeat(hex_digit), 'X')
   ),
 
@@ -25,7 +26,7 @@ const
 module.exports = grammar({
   name: 'oberon2',
 
-  extras: $ => [$.comment, /\s/],
+  extras: $ => [$.comment, /\s/, $.pragma],
 
   word: $ => $.ident,
 
@@ -45,7 +46,11 @@ module.exports = grammar({
       repeat($.procedure_decls),
       optional(seq(
         $.kBegin,
-        optional($.statement_seq)
+        seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement))))
       )),
       $.module_footer
     ),
@@ -240,7 +245,11 @@ module.exports = grammar({
       optional($.type_decls),
       optional($.variable_decls),
       repeat($.procedure_decls),
-      optional(seq($.kBegin, optional($.statement_seq))),
+      optional(seq($.kBegin, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))))),
       optional(seq($.kReturn, $.expression)),
       $.kEnd
     ),
@@ -374,18 +383,30 @@ module.exports = grammar({
     ),
 
     // statement_seq = statement {";" statement}
-    statement_seq: $ => seq(
+    /*statement_seq: $ => seq(
       $.statement,
       repeat(seq(';', $.statement))
-    ),
+    ),*/
 
     // if_statement = "IF" expression "THEN" statement_seq
     //                {"ELSIF" expression "THEN" statement_seq}
     //                ["ELSE" statement_seq] "END"
     if_statement: $ => seq(
-      $.kIf, $.expression, $.kThen, optional($.statement_seq),
-      repeat(seq($.kElseif, $.expression, $.kThen, optional($.statement_seq))),
-      optional(seq($.kElse, optional($.statement_seq))),
+      $.kIf, $.expression, $.kThen, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))),
+      repeat(seq($.kElseif, $.expression, $.kThen, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))))),
+      optional(seq($.kElse, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))))),
       $.kEnd
     ),
 
@@ -395,7 +416,11 @@ module.exports = grammar({
     ),
 
     // case = [case_label_list ":" statement_sequence]
-    case_clause: $ => seq($.case_label_list, ':', optional($.statement_seq)),
+    case_clause: $ => seq($.case_label_list, ':', seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement))))),
 
     // case_label_list = label_range {"," label_range}
     case_label_list: $ => seq(
@@ -418,14 +443,26 @@ module.exports = grammar({
     // while_statement = "WHILE" expression "DO" statement_sequence
     //                   {"ELSIF" expression "DO" statement_sequence} "END"
     while_statement: $ => seq(
-      $.kWhile, $.expression, $.kDo, optional($.statement_seq),
-      repeat(seq($.kElseif, $.expression, $.kDo, optional($.statement_seq))),
+      $.kWhile, $.expression, $.kDo, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))),
+      repeat(seq($.kElseif, $.expression, $.kDo, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))))),
       $.kEnd
     ),
 
     // repeat_statement = "REPEAT" statement_seq "UNTIL" expression
     repeat_statement: $ => seq(
-      $.kRepeat, optional($.statement_seq), $.kUntil, $.expression
+      $.kRepeat, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))), $.kUntil, $.expression
     ),
 
     // for_statement = "FOR" ident ":=" expression "TO" expression ["BY" const_expression]
@@ -433,7 +470,11 @@ module.exports = grammar({
     for_statement: $ => seq(
       $.kFor, $.ident, ':=', $.expression, $.kTo, $.expression,
       optional(seq($.kBy, $.const_expression)),
-      $.kDo, optional($.statement_seq), $.kEnd
+      $.kDo, seq( /* statement_seq hack */
+        optional($.statement),
+        repeat(seq(
+          ';',
+          optional($.statement)))), $.kEnd
     ),
 
     string: $ => token(string_literal),
@@ -482,7 +523,7 @@ module.exports = grammar({
     kUntil: $ => 'UNTIL',
     kWhile: $ => 'WHILE',
 
-    kElseif: $ => 'ELSEIF',
+    kElseif: $ => 'ELSIF',
     kImport: $ => 'IMPORT',
     kModule: $ => 'MODULE',
     kRecord: $ => 'RECORD',
@@ -494,6 +535,9 @@ module.exports = grammar({
     kProcedure: $ => 'PROCEDURE',
 
     ident: $ => token(identifier),
+
+    // This is used by XDS Oberon-2
+    pragma: $ => token(seq(/[<][*]([^*]*[*]+[^>*])*[^*]*[*]+[>]/)),
 
     comment: $ => token(seq(/[(][*]([^*]*[*]+[^)*])*[^*]*[*]+[)]/)),
   }
