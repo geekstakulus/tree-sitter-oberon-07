@@ -156,6 +156,7 @@ module.exports = grammar({
         ')'
       )),
       optional($.field_list_seq),
+      optional(";"),
       $.kEnd
     ),
 
@@ -163,9 +164,9 @@ module.exports = grammar({
     base_type: $ => $.qualident,
 
     // field_list_seq = field_list {";" field_list}
-    field_list_seq: $ => seq(
+    field_list_seq: $ => prec.left(seq(
       $.field_list, repeat(seq(';', $.field_list))
-    ),
+    )),
 
     // field_list = ident_list ":" type
     field_list: $ => seq(
